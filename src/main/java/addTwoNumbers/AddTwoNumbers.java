@@ -28,37 +28,44 @@ public class AddTwoNumbers {
         addTwoNumbers.addTwoNumbers(l1,l2);
     }
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        ListNode listNode = new ListNode();
-        ListNode listNode1 = new ListNode();
-        int a = 0;
+
+         int a = 0;
         while (true){
-            if (l1 == null&& l2 !=null){
-                listNode.val = l2.val +a;
-                listNode1 = listNode.next;
-                a = 0;
-            }
-            if (l2 == null && l1 != null){
-                listNode.val = l1.val +a;
-                listNode = listNode.next;
-                a = 0;
-            }
-            if (l1.next== null && l2.next == null){
-                listNode.val = a;
-                break;
+            if (l1 != null && l2 != null){
+                l1.val = (l1.val+ l2.val+a)%10;
+                a = ((l1.val+ l2.val+a) -(l1.val+ l2.val+a)%10)/10;
+                l1 = l1.next;
+                l2 = l2.next;
             }else {
-                int c  = l1.val = l2.val + a;
-                if (c>=10){
-                    a = (c-(c%10))/10;
+                if (l1 == null && l2 != null){
+                    if (l1.val + a>= 10){
+                        a = (l1.val + a)% 10;
+                        l1.val = ((l1.val+ a) -(l1.val+a)%10)/10;
+                        l1 = l1.next;
+                    }else {
+                        l1 = l2;
+                        l1.val = l1.val+a;
+                        break;
+                    }
+
+                } else if (l1 != null && l2 == null){
+                    if (l1.val + a>=10){
+                        
+                    }
+                    break;
+                }else {
+                    if (a>0){
+                        ListNode listNode = new ListNode();
+                        l1 = listNode;
+                        l1.val = a;
+                    }
+                    break;
+
                 }
-                listNode.val = c%10;
-
             }
-            l1= l1.next;
-            l2 = l2.next;
-            listNode = listNode.next;
-        }
 
-        return listNode;
+        }
+        return l1;
     }
 }
 
