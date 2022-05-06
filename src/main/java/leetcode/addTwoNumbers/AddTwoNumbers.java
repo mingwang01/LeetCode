@@ -53,14 +53,16 @@ public class AddTwoNumbers {
            }
        }
         String str = a.toString();
+        ListNode begin = new ListNode();
         ListNode listNode = new ListNode();
+        begin.next = listNode;
         for (int s = 0; s < str.length(); s++) {
-            //这里有问题
             listNode.val = Integer.valueOf(str.substring(s,s+1));
             ListNode listNode1 = new ListNode();
             listNode.next = listNode1;
+            listNode = listNode1;
         }
-        return listNode;
+        return begin.next;
     }
 }
     class ListNode {
